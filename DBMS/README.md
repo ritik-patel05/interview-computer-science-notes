@@ -36,8 +36,8 @@ The attributes which are in atleast one candidate key.
 
 ## Referential integrity
 
-An example of a database that has not enforced referential integrity. In other words there is a foreign key value with no corresponding primary key value in the referenced table.
-![Referential_integrity_broken](https://user-images.githubusercontent.com/67374176/144797070-f81ebaf4-40da-4c02-860b-3714e19a83e8.png)
+An example of a database that has not enforced referential integrity. In other words there is a foreign key value with no corresponding primary key value in the referenced table. <br/>
+<img src="https://user-images.githubusercontent.com/67374176/144797070-f81ebaf4-40da-4c02-860b-3714e19a83e8.png" width="800" height="250"> <br/>
 
 * A property of data stating that all its references are valid.
 * When a foreign key value is used it must reference a valid, existing primary key in the parent table or it can contain null values.
@@ -117,5 +117,5 @@ It is necessary to split table into two. <br/>
 * Durability guarantees that once a transaction has been committed, it will remain committed even in the case of a system failure (e.g., power outage or crash).
 * This usually means that completed transactions are recorded in non-volatile memory.
 
-### References
+## References
 Portions of this note is taken from Wikipedia.
