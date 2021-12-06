@@ -61,13 +61,13 @@ The value of the affected referencing attributes is changed to NULL for SET NULL
 * When an attempt is made to modify (update, insert into, or delete from) a table, the following undesirable side-effects may arise if the table is not sufficiently normalized.
 
 1. Update anamoly <br/>
-<img src="https://user-images.githubusercontent.com/67374176/144832326-72e492b6-4340-4d52-a1b1-0d966998de0e.png" width="800" /> <br/>
+<img src="https://user-images.githubusercontent.com/67374176/144832326-72e492b6-4340-4d52-a1b1-0d966998de0e.png" width="800" height="200" /> <br/>
 Employee 519 is shown as having different addresses on different records.
 2. Insertion anamoly<br/>
-<img src="https://user-images.githubusercontent.com/67374176/144832323-a96e04c8-1f91-4976-b0c5-83ee25785aa9.png" width="800" /> <br/>
+<img src="https://user-images.githubusercontent.com/67374176/144832323-a96e04c8-1f91-4976-b0c5-83ee25785aa9.png" width="800" height="200"  /> <br/>
 Until the new faculty member, Dr. Newsome, is assigned to teach at least one course, their details cannot be recorded.
 3. Deletion anamoly <br/>
-<img src="https://user-images.githubusercontent.com/67374176/144832317-8c7975b2-533a-4e23-b7f8-6d7cbc74c504.png" width="800" /> <br/>
+<img src="https://user-images.githubusercontent.com/67374176/144832317-8c7975b2-533a-4e23-b7f8-6d7cbc74c504.png" width="800" height="200" /> <br/>
 All information about Dr. Giddens is lost if they temporarily ceases to be assigned to any courses.
 
 ##### Normal Forms
@@ -84,25 +84,25 @@ For every functional dependency, X -> A, at least one of the following holds: X 
 ##### Examples
 
 ###### Table not in 1NF :
-<img src="https://user-images.githubusercontent.com/67374176/144809444-d9febd17-024a-43c0-a4d2-b97377d12ef4.png" width="800" />
+<img src="https://user-images.githubusercontent.com/67374176/144809444-d9febd17-024a-43c0-a4d2-b97377d12ef4.png" width="800" height="300" />
 
 ###### Converting table to 1NF :
-<img src="https://user-images.githubusercontent.com/67374176/144809191-766aabc8-0d72-480f-a7ec-e7ecf8d17425.jpg" width="800" />
+<img src="https://user-images.githubusercontent.com/67374176/144809191-766aabc8-0d72-480f-a7ec-e7ecf8d17425.jpg" width="800" height="300" />
 
 ###### Table in 1NF but not in 2NF :
-<img src="https://user-images.githubusercontent.com/67374176/144807470-f6d0d5df-4158-4363-a01e-8918d693b660.jpg" width="800" /> <br/>
+<img src="https://user-images.githubusercontent.com/67374176/144807470-f6d0d5df-4158-4363-a01e-8918d693b660.jpg" width="800" height="300" /> <br/>
 The relation is not in 2NF. {Manufacturer, Model} is a candidate key, and Manufacturer country is dependent on a proper subset of it: Manufacturer.
 
 ###### Converting Table to 2NF :
-<img src="https://user-images.githubusercontent.com/67374176/144807993-10b5cdcd-b9ca-4ec9-861b-70d6adb664cc.jpg" width="200" />
+<img src="https://user-images.githubusercontent.com/67374176/144807993-10b5cdcd-b9ca-4ec9-861b-70d6adb664cc.jpg" width="200" height="300" />
 
 ###### Table in 2NF but not in 3NF :
-<img src="https://user-images.githubusercontent.com/67374176/144806499-c9bda141-e0a0-480a-b890-bee98a66e050.png" width="800" /> <br/>
+<img src="https://user-images.githubusercontent.com/67374176/144806499-c9bda141-e0a0-480a-b890-bee98a66e050.png" width="800" height="200" /> <br/>
 The fact that Winner's date of birth is functionally dependent on Winner makes the table vulnerable to logical inconsistencies, as there is nothing to stop the same person from being shown with different dates of birth on different records.
 
 ###### Converting table from 2NF to 3NF :
 It is necessary to split table into two. <br/>
-<img src="https://user-images.githubusercontent.com/67374176/144806782-4fa25c86-19d1-4817-8eb0-1294077f2618.png" width="800" />
+<img src="https://user-images.githubusercontent.com/67374176/144806782-4fa25c86-19d1-4817-8eb0-1294077f2618.png" width="800" height="200" />
 
 ### ACID  (atomicity, consistency, isolation, durability)
 * It is a set of properties of database transactions intended to guarantee data validity despite errors, power failures, and other mishaps.
