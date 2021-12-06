@@ -1,14 +1,14 @@
-### Database
+## Database
 A database is an organized collection of data stored and accessed electronically from a computer system.
 
-### Database Management System (DBMS)
+## Database Management System (DBMS)
 It is the software that interacts with the end users, applications and the database itself to capture and analyze the data.
 
 Enables users to define, create, maintain and control access to the database.
 
 Example: MySQL, PostgreSQL.
 
-### Functionality Or Advantages of DBMS
+## Functionality Or Advantages of DBMS
 1. Data storage, retrieval and update
 2. User accessible catalog or data dictionary describing the metadata
 3. Support for transactions and concurrency
@@ -17,7 +17,7 @@ Example: MySQL, PostgreSQL.
 6. Access support from remote locations
 7. Enforcing constraints to ensure data in the database abides by certain rules
 
-### Keys
+## Keys
 ##### 1. Super Key: 
 Set of attributes(columns) that uniquely identify each tuple(rows) of a relation.
 ##### 2. Candidate Key:
@@ -34,7 +34,7 @@ One of the candidate keys
 ##### Prime attributes
 The attributes which are in atleast one candidate key.
 
-### Referential integrity
+## Referential integrity
 
 An example of a database that has not enforced referential integrity. In other words there is a foreign key value with no corresponding primary key value in the referenced table.
 ![Referential_integrity_broken](https://user-images.githubusercontent.com/67374176/144797070-f81ebaf4-40da-4c02-860b-3714e19a83e8.png)
@@ -53,7 +53,7 @@ A value cannot be updated or deleted when a row exists in a referencing(child) t
 ##### 3. SET NULL, SET DEFAULT
 The value of the affected referencing attributes is changed to NULL for SET NULL, and to the specified default value for SET DEFAULT during DELETE or UPDATE.
 
-### Database Normalization
+## Database Normalization
 
 ##### Why/Need?
 * To reduce data redundancy and improve data integrity.
@@ -81,7 +81,7 @@ Atomic columns (cells cannot have tables as values)
 2NF and,
 For every functional dependency, X -> A, at least one of the following holds: X is a super key or every element of A \ X, the set difference between A and X, is a prime attribute.
 
-##### Examples
+### Examples
 
 ###### Table not in 1NF :
 <img src="https://user-images.githubusercontent.com/67374176/144809444-d9febd17-024a-43c0-a4d2-b97377d12ef4.png" width="800" height="300" />
@@ -104,7 +104,7 @@ The fact that Winner's date of birth is functionally dependent on Winner makes t
 It is necessary to split table into two. <br/>
 <img src="https://user-images.githubusercontent.com/67374176/144806782-4fa25c86-19d1-4817-8eb0-1294077f2618.png" width="800" height="200" />
 
-### ACID  (atomicity, consistency, isolation, durability)
+## ACID  (atomicity, consistency, isolation, durability)
 * It is a set of properties of database transactions intended to guarantee data validity despite errors, power failures, and other mishaps.
 * A *Transaction* represents any change in the database.
 
