@@ -37,7 +37,7 @@ The attributes which are in atleast one candidate key.
 ## Referential integrity
 
 An example of a database that has not enforced referential integrity. In other words there is a foreign key value with no corresponding primary key value in the referenced table. <br/>
-<img src="https://user-images.githubusercontent.com/67374176/144797070-f81ebaf4-40da-4c02-860b-3714e19a83e8.png" width="800" height="250"> <br/>
+<img src="https://user-images.githubusercontent.com/67374176/144797070-f81ebaf4-40da-4c02-860b-3714e19a83e8.png" width="300" height="250"> <br/>
 
 * A property of data stating that all its references are valid.
 * When a foreign key value is used it must reference a valid, existing primary key in the parent table or it can contain null values.
@@ -117,5 +117,73 @@ It is necessary to split table into two. <br/>
 * Durability guarantees that once a transaction has been committed, it will remain committed even in the case of a system failure (e.g., power outage or crash).
 * This usually means that completed transactions are recorded in non-volatile memory.
 
+## Why is concurrency control needed?
+* If concurrent transactions with interleaving operations are allowed in an uncontrolled manner, many problems can occur such as,
+1. The lost update problem
+A second transaction writes a second value of a data-item on top of a first value written by a first concurrent transaction. Hence, the first value is lost to the other transactions running concurrently which need, by their precedence, to read the first value.
+2. The dirty read problem
+Transactions read a value written by a transaction that has been later aborted. Hence, the reading transactions end with incorrect results.
+3. The incorrect summary problem
+While one transaction takes a summary(e.g., sum of values) over the values of all the instances of a repeated data-item, a second transaction updates some instances of that data-item.
+
+Most high performance transactional systems need to run transactions concurrently to meet their performance requirements. Hence, we require Concurrency Control Mechanisms.
+
+## Concurrency Control Mechanisms
+1. Optimistic
+* While running, transactions use data resources without acquiring locks on those resources. Before committing, each transaction verifies that no other transaction has modified the data it has read. If the check reveals conflicting modifications, the committing transaction rolls back and can be restarted.
+* Used in databases having low *data contention*(multiple processes competing for access to the same data block at the same time, e.g., frequent updates, index or table scans)
+* If contention for data resources is frequent, the cost of repeatedly restarting transactions hurts performance significantly, in which case other concurrency methods may be better suited. However, locking-based ("pessimistic") methods also can deliver poor performance because locking can drastically limit effective concurrency even when deadlocks are avoided.
+2. Pessimistic
+The system assumes the wost - it assumes that two or more users will want to update the same record at the same time, and then prevents that possibility by locking the record, no matter how unlikely conflicts actually are.
+The locks are placed as soon as any piece of the row is accessed, making it impossible for two or more users to update the row at the same time. 
+Depending on the lock mode *(shared, exclusive, or update)*, other users might be able to read the data even though a lock has been placed.  
+
+## Locks
+* A lock is a mechanism for preventing two or more users from doing conflicting operations at the same time.
+* If all are read only operations, then no conflict.
+* If all are write only operations, then no conflict.
+* Row-level locks: are placed on single records (rows) that the statements in a transaction define. The locks are placed as soon as any piece of the row is accessed.
+* Table-level locks: they prevent concurrent users from making schema changes (DDL operations) simultaneously or while records within the table are being changed.
+e.g., if you are updating a customer’s home phone number, you do not want another user to drop the telephone number column at the same time. If the other user was allowed to drop the telephone number column before you were finished, your transaction would try to write an updated telephone number to a column that no longer exists, thus resulting in data corruption.
+
+## Lock Modes
+1. SHARED
+Row-level shared locks allow multiple users to read data, but do not allow any users to change that data.
+Multiple users can hold shared locks simultaneously.
+Table-level shared locks allow multiple users to perform read and write operations on the table, but do not allow any users to perform DDL operations.
+
+2. EXCLUSIVE
+An exclusive lock allows only one user/connection to update a particular piece of data (insert, update, and delete).
+When one user has an exclusive lock on a row or table, no other lock of any type may be placed on it.
+
+3. UPDATE
+Update locks are always row-level locks.
+When a user accesses a row with the SELECT... FOR UPDATE statement, the row is locked with an update mode lock.
+This means that no other user can read or update the row and ensures the current user can later update the row.
+You can acquire an update lock on a record that already has a shared lock, but you cannot acquire a shared lock on a record that already has an update lock. Because an update lock prevents subsequent read locks, it is easier to convert the update lock to an exclusive lock.
+Shared and exclusive locks cannot be mixed. If User1 has an exclusive lock on a record, User2 cannot get a shared lock or an exclusive lock on that same record.
+
+## Methods for concurrency control
+### Two-phase Locking(2PL)
+is a concurrency control method that guarantees serializability(if its outcome is equal to the outcome of its transaction executed serially.)
+
+Two major types of locks are used:
+
+* Write-lock (exclusive lock) is associated with a database object by a transaction (Terminology: "the transaction locks the object," or "acquires lock for it") before writing (inserting/modifying/deleting) this object.
+* Read-lock (shared lock) is associated with a database object by a transaction before reading (retrieving the state of) this object.
+
+Compatability(Two transactions, ig ):
+has read-lock(i): need read-lock(j) (yes)
+has read-lock(i): need write-lock(j) (no, hence make edge Ti->Tj in precedence graph) 
+has write-lock(i): need write-lock(j) (no, Ti->Tj)
+has write-lock(i): need read-lock(j) (no, Ti->Tj)
+
+*"no"* indicates incompatibility, i.e, a case when a lock of the first type (in left column) on an object blocks a lock of the second type (in top row) from being acquired on the same object (by another transaction). An object typically has a queue of waiting requested (by transactions) operations with respective locks. 
+
+### Serialization (Conflict serializable) graph checking
+Checking for cycles in the schedule's graph and breaking them by aborts.
+
+The schedule S is serializable if and only if the *precedence graph* has no cycles. if T1 and T2 constitute a cycle, then it is not(conflict) serializable.
+
 ## References
-Portions of this note is taken from Wikipedia.
+Portions of this note is taken from Wikipedia, support.unicomsi.com
